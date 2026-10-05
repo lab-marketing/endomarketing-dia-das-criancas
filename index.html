@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Campanha de Dia das Crianças</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFCFF;
+  --paper-2:#F1F5FD;
+  --rule:#D6E1F4;
+  --margin:#E4574B;
+  --ink:#1F2A55;
+  --ink-soft:#4A5580;
+  --yellow:#F5C518;
+  --green:#2E9E6A;
+  --blue:#3767C9;
+  --card:#FFFFFF;
+  --card-line:#DCE3F2;
+  --holiday:#E4574B;
+  --org:#8A93B5;
+  --drive:#9B6BD6;
+  --display:"Bricolage Grotesque", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Literata", Georgia, "Times New Roman", serif;
+  --hand:"Caveat", "Segoe Print", "Comic Sans MS", cursive;
+  --ui:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#161C36; --paper-2:#1C2342; --rule:#27305A; --margin:#F07166;
+    --ink:#E8ECFA; --ink-soft:#A9B2D6; --yellow:#F7D04A; --green:#4FC08B; --blue:#7FA3F0;
+    --card:#20284B; --card-line:#323C6B; --holiday:#F07166; --org:#9CA6CE; --drive:#B892F2;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#161C36; --paper-2:#1C2342; --rule:#27305A; --margin:#F07166;
+  --ink:#E8ECFA; --ink-soft:#A9B2D6; --yellow:#F7D04A; --green:#4FC08B; --blue:#7FA3F0;
+  --card:#20284B; --card-line:#323C6B; --holiday:#F07166; --org:#9CA6CE; --drive:#B892F2;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--paper-2);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+
+/* Masthead */
+.masthead{
+  max-width:1180px;margin:0 auto;padding:34px 24px 18px;
+  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;
+}
+.masthead h1{
+  font-family:var(--display);font-weight:800;margin:0;
+  display:flex;flex-direction:column;align-items:flex-start;gap:.18em;
+}
+.masthead h1 .o{
+  display:inline-block;color:var(--paper);background:var(--ink);
+  font-size:clamp(1.3rem,3.2vw,2.2rem);line-height:1;letter-spacing:-.02em;
+  padding:.18em .42em .24em;border-radius:.3em;transform:rotate(-3deg);
+  margin-left:.1em;
+}
+.masthead h1 .big{
+  font-size:clamp(2.8rem,9.5vw,6.6rem);line-height:.95;letter-spacing:-.045em;
+  padding-bottom:.2em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' preserveAspectRatio='none'%3E%3Cpath d='M4 14 C 40 4, 70 22, 110 12 S 180 4, 220 14 S 300 22, 340 10 S 385 8, 396 13' fill='none' stroke='%23F5C518' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E") left bottom / 100% .26em no-repeat;
+}
+.masthead p{margin:0;font-family:var(--hand);font-size:1.6rem;line-height:1.1;color:var(--ink-soft);max-width:24ch}
+
+/* Layout */
+.shell{max-width:1180px;margin:0 auto;padding:12px 24px 48px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.shell{grid-template-columns:1fr;padding:8px 14px 40px}.masthead{padding:20px 14px 6px}}
+
+.side{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:18px}
+@media (max-width:900px){
+  .side{display:contents}
+  .cal-panel{order:1}
+  main{order:2}
+  .idx-panel{order:3}
+  .cal{max-width:380px;margin:0 auto}
+  .day{aspect-ratio:auto;height:40px}
+  .tl-item{grid-template-columns:1fr;gap:2px}
+}
+.panel{background:var(--paper);border:1px solid var(--card-line);border-radius:14px;padding:16px}
+.panel h2{font-family:var(--display);font-weight:600;font-size:1.05rem;margin:0 0 10px}
+
+/* Calendar */
+.cal-month{font-family:var(--display);font-weight:600;font-size:.95rem;margin:10px 0 4px;color:var(--ink-soft)}
+.cal-month:first-of-type{margin-top:0}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.cal-sub{font-family:var(--ui);font-size:.78rem;color:var(--ink-soft);margin:-6px 0 10px}
+.cal .wd{font-family:var(--ui);font-size:.7rem;text-align:center;color:var(--ink-soft);padding-bottom:2px}
+.day{
+  position:relative;aspect-ratio:1/1;border:0;border-radius:8px;background:transparent;
+  font-family:var(--ui);font-size:.8rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0;cursor:default;
+}
+.day.out{visibility:hidden}
+.day.sep{color:var(--ink-soft)}
+.day small{font-size:.58rem;line-height:1;font-weight:600;color:var(--ink-soft)}
+.day.current small{color:inherit}
+.day.has{cursor:pointer;background:var(--card);box-shadow:inset 0 0 0 1px var(--card-line)}
+.day.has:hover{box-shadow:inset 0 0 0 2px var(--ink-soft)}
+.day.drive::after{content:"";position:absolute;left:3px;right:3px;bottom:1px;height:3px;border-radius:2px;background:var(--drive);opacity:.6}
+.cal{isolation:isolate}
+.day.range.r-own{background:transparent;box-shadow:none}
+.day.range::before{content:"";position:absolute;top:18%;bottom:18%;left:-3px;right:-3px;background:color-mix(in srgb, var(--org) 30%, var(--paper));z-index:-1}
+.day.range.r-row-start::before{left:4%;border-radius:999px 0 0 999px}
+.day.range.r-row-end::before{right:4%;border-radius:0 999px 999px 0}
+.day.range.r-start::before{left:12%;border-radius:999px 0 0 999px}
+.day.range.r-end::before{right:12%;border-radius:0 999px 999px 0}
+.day.range.r-own:hover::before{background:color-mix(in srgb, var(--org) 45%, var(--paper))}
+.day.range > *{position:relative}
+.day.range.r-own.current{background:transparent;color:var(--ink);font-weight:800;outline:none}
+.day.range.range-on::before{background:color-mix(in srgb, var(--org) 65%, var(--paper))}
+.day.t-acao{background:color-mix(in srgb, var(--green) 20%, var(--card));box-shadow:inset 0 0 0 2px var(--green);font-weight:700}
+.day.t-acao:hover{box-shadow:inset 0 0 0 3px var(--green)}
+.day.t-org{background:transparent;box-shadow:none;outline:1.5px dashed var(--org);outline-offset:-3px}
+.day.t-org:hover{outline-width:2.5px;box-shadow:none}
+.day.has{padding-bottom:3px}
+.day.holiday{color:var(--holiday);font-weight:700}
+.day.current,.day.current.t-acao,.day.current.t-org{background:var(--ink);color:var(--paper);box-shadow:none;outline:none}
+.dots{display:flex;align-items:center;gap:3px;height:11px}
+.mk{display:inline-block;width:10px;height:10px;flex:none}
+.mk.slack{background:var(--yellow);border-radius:50%}
+.mk.email{background:var(--blue);border-radius:2px;width:9px;height:9px}
+.mk.acao{background:var(--green);width:12px;height:12px;clip-path:polygon(50% 0,62% 36%,100% 36%,69% 58%,81% 96%,50% 73%,19% 96%,31% 58%,0 36%,38% 36%)}
+.mk.org{width:8px;height:8px;border:2px solid var(--org);transform:rotate(45deg);border-radius:1px}
+.day.current .mk.slack,.day.current .mk.email{box-shadow:0 0 0 1.5px var(--ink)}
+.day.current .mk.org{border-color:var(--paper)}
+.chips{display:inline-flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--ui);font-size:.78rem;font-weight:600;padding:3px 10px 3px 8px;border-radius:999px;border:1.5px solid var(--card-line);background:var(--card);color:var(--ink)}
+.chip.slack{border-color:var(--yellow)}
+.chip.email{border-color:var(--blue)}
+.chip.acao{border-color:var(--green);background:color-mix(in srgb, var(--green) 12%, var(--card))}
+.chip.org{border-color:var(--org);border-style:dashed}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px;font-family:var(--ui);font-size:.75rem;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend .bar{width:16px;height:4px;border-radius:2px;background:var(--drive);opacity:.6}
+.legend .band{width:18px;height:10px;border-radius:5px;background:color-mix(in srgb, var(--org) 35%, var(--paper))}
+.legend{flex-direction:column;align-items:flex-start;gap:7px}
+.legend .grp{display:flex;flex-wrap:wrap;gap:7px 14px}
+.legend .sw{width:18px;height:18px;border-radius:5px;display:inline-grid;place-items:center}
+.legend .sw.acao{background:color-mix(in srgb, var(--green) 20%, var(--card));box-shadow:inset 0 0 0 2px var(--green)}
+.legend .sw.acao::after{content:"";width:10px;height:10px;background:var(--green);clip-path:polygon(50% 0,62% 36%,100% 36%,69% 58%,81% 96%,50% 73%,19% 96%,31% 58%,0 36%,38% 36%)}
+.legend .sw.org{outline:1.5px dashed var(--org);outline-offset:-2px}
+.legend .sw.org::after{content:"";width:6px;height:6px;border:2px solid var(--org);transform:rotate(45deg)}
+.legend .hol{color:var(--holiday);font-weight:700}
+
+/* Index */
+.index{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;font-family:var(--ui);font-size:.86rem}
+.index button{width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:6px 8px;cursor:pointer;display:grid;grid-template-columns:100px 1fr auto;gap:8px;align-items:center;line-height:1.3}
+.index .d{white-space:nowrap}
+.index button[aria-current="true"] .mk.org{border-color:var(--paper)}
+.index button:hover{background:var(--card)}
+.index button[aria-current="true"]{background:var(--ink);color:var(--paper)}
+.index .d{font-weight:700;font-variant-numeric:tabular-nums}
+
+/* Page */
+.page{
+  position:relative;background-color:var(--paper);
+  background-image:linear-gradient(to bottom, transparent 31px, var(--rule) 31px, var(--rule) 32px);
+  background-size:100% 32px;background-position:0 20px;
+  border-radius:6px 16px 16px 6px;border:1px solid var(--card-line);
+  padding:34px 40px 30px 86px;min-height:70vh;
+  box-shadow:6px 6px 0 var(--card-line);
+}
+.page::before{content:"";position:absolute;top:0;bottom:0;left:60px;width:2px;background:var(--margin);opacity:.7}
+.holes{position:absolute;left:20px;top:48px;bottom:48px;display:flex;flex-direction:column;justify-content:space-around}
+.holes i{width:16px;height:16px;border-radius:50%;background:var(--paper-2);box-shadow:inset 0 1px 2px rgba(0,0,0,.18)}
+@media (max-width:640px){
+  .page{padding:24px 18px 24px 40px;background-size:100% 30px}
+  .page::before{left:26px}
+  .holes{left:6px}
+  .holes i{width:12px;height:12px}
+}
+.page.turn{animation:turn .35s ease-out}
+@keyframes turn{from{opacity:0;transform:translateX(18px) rotate(.4deg)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.page.turn{animation:none}}
+
+.edition-line{font-family:var(--ui);font-size:.82rem;color:var(--ink-soft);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.kicker{font-family:var(--hand);font-size:1.6rem;line-height:1;color:var(--margin);margin:0 0 4px}
+.page h2.headline{font-family:var(--display);font-weight:800;letter-spacing:-.025em;font-size:clamp(2rem,5vw,3.3rem);line-height:1;margin:0 0 14px;max-width:18ch}
+.lede{font-size:1.12rem;max-width:62ch;margin:0 0 22px}
+.page h3{font-family:var(--display);font-weight:600;font-size:1.25rem;margin:28px 0 10px}
+.actions{margin:0;padding-left:1.2em;max-width:64ch}
+.actions li{margin:4px 0}
+.actions li::marker{color:var(--green)}
+
+.margin-note{
+  font-family:var(--hand);font-size:1.45rem;line-height:1.15;color:var(--margin);
+  transform:rotate(-1.5deg);margin:14px 0 4px;max-width:40ch;
+}
+.margin-note::before{content:"✎ ";}
+
+/* Message cards */
+.msg{background:var(--card);border:1px solid var(--card-line);margin:14px 0 22px;max-width:680px;font-family:var(--ui);font-size:.95rem;line-height:1.55}
+.msg.slack{border-radius:4px 14px 14px 14px;border-left:5px solid var(--yellow)}
+.msg.email{border-radius:3px;border-top:5px solid var(--blue)}
+.msg-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px dashed var(--card-line)}
+.avatar{width:34px;height:34px;border-radius:8px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.8rem;flex:none}
+.msg-who{display:flex;flex-direction:column;line-height:1.25}
+.msg-who b{font-weight:700}
+.msg-who small{color:var(--ink-soft)}
+.tag{margin-left:auto;font-size:.75rem;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.slack .tag{background:var(--yellow);color:#1F2A55}
+.email .tag{background:var(--blue);color:#fff}
+.email-meta{padding:10px 16px 0;font-size:.88rem;color:var(--ink-soft)}
+.email-meta div{padding:2px 0}
+.email-meta b{color:var(--ink)}
+.msg-body{padding:12px 16px 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{display:flex;justify-content:flex-end;padding:0 12px 12px}
+.copy button{border:1px solid var(--card-line);background:var(--paper);border-radius:8px;padding:5px 12px;font-family:var(--ui);font-size:.8rem;cursor:pointer}
+.copy button:hover{border-color:var(--ink-soft)}
+
+/* Special blocks */
+.schedule{display:grid;grid-template-columns:auto 1fr;gap:0;max-width:600px;border:1px solid var(--card-line);border-radius:12px;overflow:hidden;background:var(--card);font-family:var(--ui);font-size:.93rem}
+.schedule div{padding:10px 14px;border-bottom:1px solid var(--card-line)}
+.schedule div:nth-last-child(-n+2){border-bottom:0}
+.schedule .t{font-family:var(--display);font-weight:800;font-size:1.1rem;background:var(--paper-2);white-space:nowrap}
+.plaque{max-width:360px;background:var(--card);border:1px solid var(--card-line);padding:16px 18px;box-shadow:3px 3px 0 var(--card-line);font-family:var(--ui);font-size:.92rem;line-height:1.5;margin:10px 0}
+.plaque .title{font-family:var(--body);font-style:italic;font-size:1.15rem;margin-bottom:6px}
+.plaque .quote{margin-top:8px;font-family:var(--body);font-style:italic;color:var(--ink-soft)}
+
+/* Cover */
+.fronts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:10px 0 6px}
+.front{background:var(--card);border:1px solid var(--card-line);padding:16px 18px;border-radius:12px}
+.front:nth-child(1){transform:rotate(-.6deg)}
+.front:nth-child(2){transform:rotate(.5deg)}
+.front h4{font-family:var(--display);font-weight:800;font-size:1.15rem;margin:0 0 6px}
+.front p{margin:0;font-size:.98rem}
+.timeline{list-style:none;margin:14px 0 0;padding:0;max-width:700px;position:relative}
+.timeline::before{content:"";position:absolute;left:17px;top:6px;bottom:6px;width:3px;border-radius:2px;background:var(--card-line)}
+.tl-group{font-family:var(--hand);font-size:1.55rem;line-height:1;color:var(--margin);padding:18px 0 4px 52px}
+.tl-group:first-child{padding-top:0}
+.tl-item{position:relative;display:grid;grid-template-columns:96px 1fr;gap:4px 18px;padding:10px 0 12px 52px}
+.tl-item.drive::after{content:"";position:absolute;left:25px;top:0;bottom:0;width:4px;background:var(--drive);opacity:.55}
+.tl-item.drive.d-start::after{top:18px;border-radius:2px 2px 0 0}
+.tl-item.drive.d-end::after{bottom:auto;height:26px;border-radius:0 0 2px 2px}
+.tl-node{position:absolute;left:4px;top:10px;width:30px;height:30px;border-radius:50%;background:var(--card);display:grid;place-items:center;box-shadow:0 0 0 3px var(--paper);z-index:1}
+.tl-node::after{content:""}
+.tl-item.p-acao .tl-node{background:var(--green)}
+.tl-item.p-acao .tl-node::after{width:16px;height:16px;background:var(--paper);clip-path:polygon(50% 0,62% 36%,100% 36%,69% 58%,81% 96%,50% 73%,19% 96%,31% 58%,0 36%,38% 36%)}
+.tl-item.p-slack .tl-node{border:3px solid var(--yellow)}
+.tl-item.p-slack .tl-node::after{width:10px;height:10px;border-radius:50%;background:var(--yellow)}
+.tl-item.p-email .tl-node{border:3px solid var(--blue)}
+.tl-item.p-email .tl-node::after{width:10px;height:10px;border-radius:2px;background:var(--blue)}
+.tl-item.p-org .tl-node{outline:2px dashed var(--org);outline-offset:-2px}
+.tl-item.p-org .tl-node::after{width:9px;height:9px;border:2px solid var(--org);transform:rotate(45deg)}
+.tl-item.hol .tl-node{width:14px;height:14px;left:12px;top:14px;background:var(--holiday)}
+.tl-item.hol .tl-when,.tl-item.hol .tl-title{color:var(--holiday)}
+.tl-when{font-family:var(--display);font-weight:800;font-size:1.2rem;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:4px}
+.tl-when small{display:block;font-family:var(--ui);font-weight:500;font-size:.75rem;color:var(--ink-soft);margin-top:3px}
+.tl-body{min-width:0;padding-top:3px}
+.tl-title{display:block;background:none;border:0;padding:0;text-align:left;cursor:pointer;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.25;color:var(--ink)}
+.tl-title:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+span.tl-title{cursor:default}
+.tl-sum{margin:4px 0 8px;font-size:.95rem;line-height:1.5;color:var(--ink-soft);max-width:52ch}
+.tl-flag{display:block;font-family:var(--ui);font-size:.74rem;font-weight:700;color:var(--drive);margin:0 0 2px}
+.tl-group{position:relative}
+.tl-group.drive::after{content:"";position:absolute;left:25px;top:0;bottom:0;width:4px;background:var(--drive);opacity:.55}
+
+/* Review */
+.review{counter-reset:r;list-style:none;padding:0;margin:0;max-width:680px}
+.review li{counter-increment:r;position:relative;padding:12px 14px 12px 52px;margin:10px 0;background:var(--card);border:1px solid var(--card-line);border-radius:10px}
+.review li::before{content:counter(r);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--margin);color:#fff;font-family:var(--display);font-weight:800;font-size:.85rem;display:grid;place-items:center}
+.review b{font-family:var(--display);font-weight:600}
+.review .where{display:block;font-family:var(--ui);font-size:.8rem;color:var(--ink-soft);margin-bottom:2px}
+
+/* Pager */
+.pager{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:34px;padding-top:16px;border-top:2px solid var(--ink)}
+.pager button{background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:10px 18px;font-family:var(--ui);font-weight:600;font-size:.9rem;cursor:pointer;max-width:48%;text-align:left;line-height:1.25}
+.pager button.next{text-align:right}
+.pager button:disabled{visibility:hidden}
+.pager small{display:block;font-weight:400;opacity:.8;font-size:.78rem}
+.pageno{font-family:var(--hand);font-size:1.4rem;color:var(--ink-soft);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1><span class="o">Campanha de</span><span class="big">Dia das Crianças</span></h1>
+</header>
+
+<div class="shell">
+  <aside class="side">
+    <section class="panel cal-panel" aria-labelledby="cal-title">
+      <h2 id="cal-title">Calendário</h2>
+      <p class="cal-sub">27 de setembro a 31 de outubro</p>
+      <div id="calendar"></div>
+      <div class="legend">
+        <div class="grp"><span><i class="mk slack"></i>Slack</span><span><i class="mk email"></i>E-mail</span></div>
+        <div class="grp"><span><i class="sw acao"></i>Ação com os times</span><span><i class="sw org"></i>Organização</span></div>
+        <div class="grp"><span><i class="band"></i>Período de organização</span></div>
+        <div class="grp"><span><i class="bar"></i>Arrecadação</span><span class="hol">12 feriado</span></div>
+      </div>
+    </section>
+    <section class="panel idx-panel" aria-labelledby="idx-title">
+      <h2 id="idx-title">Nesta edição</h2>
+      <ol class="index" id="index"></ol>
+    </section>
+  </aside>
+
+  <main>
+    <article class="page" id="page" aria-live="polite">
+      <div class="holes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div id="content"></div>
+      <nav class="pager" aria-label="Navegar entre as páginas">
+        <button class="prev" id="prev"></button>
+        <span class="pageno" id="pageno"></span>
+        <button class="next" id="next"></button>
+      </nav>
+    </article>
+  </main>
+</div>
+
+<script>
+const PIX = `   • Fundação Vidal Ramos – chave Pix (CNPJ): 83.886.556/0001-54
+   • Lar da Menina – chave Pix (CNPJ): 85.787.463/0001-06`;
+
+const pages = [
+{
+  id:"capa", short:"Capa", date:"Outubro", days:[],
+  kicker:"Edição especial", headline:"Outubro é das crianças",
+  lede:"A campanha de Dia das Crianças da IPM roda em duas frentes ao mesmo tempo, de 28/09 a 22/10. Folheie as páginas para ver o que acontece em cada dia e ler cada comunicado como ele vai ser publicado.",
+  cover:true
+},
+{
+  id:"prep", short:"Preparação", date:"28/09 a 08/10", range:["09-28","10-08"], days:[], types:["org"],
+  kicker:"Preparação", headline:"Caixa montada, fotos a caminho",
+  lede:"Os bastidores vão até 08/10: a estrutura de doações fica pronta até a abertura da campanha, e as fotos e os desenhos chegam até a véspera da ação.",
+  actionGroups:[
+    {title:"Até 05/10: caixa, folhetos e totem", items:[
+      "Montar a caixa de doações: papelão grande e resistente, coberta com papel contact colorido, laço, logo da IPM e bilhete com os itens mais pedidos pelas instituições.",
+      "Colar folhetos nas sedes explicando a campanha.",
+      "Ativar a arte no totem.",
+      "Deixar a caixa de doações disponível para a abertura da arrecadação em 05/10."
+    ]},
+    {title:"Até 08/10: fotos e desenhos", items:[
+      "Levantar as fotos de infância dos colaboradores e os desenhos das crianças especiais da vida deles, para a decoração do mural."
+    ]}
+  ]
+},
+{
+  id:"0510", short:"Lançamento", date:"Segunda, 05/10", days:["10-05"], types:["slack","email"],
+  kicker:"Semana 1: lançamento", headline:"Começa a campanha solidária",
+  lede:"A arrecadação para o Lar da Menina e a Fundação Vidal Ramos abre hoje e vai até 21/10. O Slack anuncia para todos, e o e-mail sai em três versões: Fábrica, Floripa e remotos.",
+  comms:[
+    {type:"slack", n:1, text:`Começa hoje a campanha solidária de Dia das Crianças da IPM
+
+De 05/10 a 21/10, vamos arrecadar doações para duas instituições que cuidam de crianças e adolescentes: o Lar da Menina (Rio do Sul) e a Fundação Vidal Ramos (Florianópolis).
+
+Como doar nas sedes presenciais:
+● Fábrica – Rio do Sul: Procure a caixa de doações na recepção
+● Sede de Floripa: Procure a caixa de doações ao lado do totem da entrada
+● Lia: Procure a caixa de doações ao lado dos relógios de ponto
+
+Remotos: doação via Pix, com valor espontâneo, diretamente para as instituições
+${PIX}
+
+A lista completa dos itens mais pedidos está no e-mail enviado hoje. Contamos com vocês!`},
+    {type:"email", n:1, label:"E-mail #1 · Fábrica", who:"E-mail para a Fábrica (Rio do Sul)", subject:"Dia das Crianças: saiba como doar", text:`Olá, pessoal!
+
+Neste Dia das Crianças, queremos celebrar a data cuidando de quem mais precisa. 
+
+De 05/10 a 21/10, as doações da Fábrica vão para o Lar da Menina que acolhe crianças e adolescentes de 0 a 18 anos incompletos, de ambos os sexos, que necessitam de acolhimento.
+
+🎯 ITENS MAIS PEDIDOS
+Higiene infantil: shampoo, condicionador e escovas de dente infantis, colônia infantil e repelente.
+Higiene para adolescentes: shampoo, condicionador, escovas de dente e desodorante roll-on ou aerossol, além de produtos de limpeza em geral.
+Educação e leitura: material escolar e livros de literatura em geral.
+Alimentação: leite integral e achocolatado em pó.
+Vestuário e enxoval: roupas, calçados, roupas de cama e toalhas.
+Os produtos de higiene, limpeza e alimentação devem ser novos, lacrados e dentro do prazo de validade. Roupas, calçados, roupas de cama, toalhas e livros podem ser usados, desde que estejam em bom estado.
+
+✅ COMO DOAR
+Procure a caixa de doações na recepção da Fábrica.
+
+Obrigado por fazer parte!
+[Time IPM]`},
+    {type:"email", n:1, label:"E-mail #1 · Floripa", who:"E-mail para Floripa (Sede Adm e LIA)", subject:"[definir assunto]", text:`Olá, pessoal!
+
+Neste Dia das Crianças, queremos celebrar a data cuidando de quem mais precisa.
+
+De 05/10 a 21/10, a IPM vai arrecadar doações para a Fundação Vidal Ramos que atende crianças e adolescentes de 6 a 15 anos com contraturno escolar, reforço escolar, hora criativa (desenvolvimento artístico e cultural), esportes (jiu-jitsu e xadrez) e iniciação à Tecnologia da Informação, com laboratórios de informática e de robótica. 
+
+🎯 ITENS MAIS PEDIDOS
+
+• Fraldas e cuidados: fraldas infantis nos tamanhos G e XXG, fraldas geriátricas adulto tamanho XG, pomada para assadura infantil e lenços umedecidos infantis.
+• Higiene infantil: shampoo, condicionador e escovas de dente infantis, colônia infantil e repelente.
+• Higiene para adolescentes: shampoo, condicionador, escovas de dente e desodorante roll-on ou aerosol, além de produtos de limpeza em geral.
+• Educação e leitura: material escolar e livros de literatura em geral.
+• Alimentação: leite integral e achocolatado em pó.
+• Vestuário e enxoval: roupas, calçados, roupas de cama e toalhas.
+
+✅ COMO DOAR
+Procure a caixa de doações ao lado do totem da entrada.
+
+Vamos acompanhar a evolução juntos? Fique de olho no nosso termômetro de doações.
+
+Obrigado por fazer parte!`},
+    {type:"email", n:1, label:"E-mail #1 · Remotos", who:"E-mail para os colaboradores remotos", subject:"Dia das Crianças: saiba como doar de onde você estiver", text:`Olá, pessoal!
+
+Neste Dia das Crianças, queremos celebrar a data cuidando de quem mais precisa. 
+
+De 05/10 a 21/10, a IPM vai arrecadar doações para duas instituições que cuidam de crianças e adolescentes, e você pode participar de onde estiver.
+
+Lar da Menina: acolhe crianças e adolescentes de 0 a 18 anos incompletos, de ambos os sexos, que necessitam de acolhimento.
+
+Fundação Vidal Ramos: atende crianças e adolescentes de 6 a 15 anos com projetos de contraturno escolar, reforço escolar, hora criativa (desenvolvimento artístico e cultural), esportes (jiu-jitsu e xadrez) e iniciação à Tecnologia da Informação, com laboratórios de informática e de robótica.
+
+✅ COMO DOAR
+
+Faça uma doação via Pix, com o valor que preferir, diretamente para a instituição que escolher:
+
+Lar da Menina – chave Pix (CNPJ): 85.787.463/0001-06
+Fundação Vidal Ramos – chave Pix (CNPJ): 83.886.556/0001-54
+
+Se estiver perto de uma das nossas sedes, também pode deixar itens nas caixas de doação. 
+
+Vamos acompanhar a evolução juntos? Fique de olho nos próximos e-mails.
+
+Obrigado por fazer parte!
+[Time IPM]`}
+  ]
+},
+{
+  id:"0710", short:"Sexta tem surpresa", date:"Quarta, 07/10", days:["10-07"], types:["slack"],
+  kicker:"Semana 1: lançamento", headline:"Sexta tem surpresa",
+  lede:"Um aviso curto e com mistério: na sexta tem surpresa, e a brincadeira já começa hoje com a troca da foto de perfil do Slack pela foto de criança.",
+  comms:[
+    {type:"slack", n:2, text:`Na próxima sexta-feira (09/10), véspera do feriado, vamos entrar no clima do Dia das Crianças com uma surpresa...
+
+Para entrar no clima de brincadeira, troque hoje a sua foto de perfil do Slack por uma foto de quando você era criança. 📸
+
+E não se esqueçam: seguimos com a campanha solidária até 21/10. Quem ainda não doou pode deixar sua contribuição nas caixas de doação ou fazer um Pix direto para as instituições. 🤝`}
+  ]
+},
+{
+  id:"0810", short:"Montagem do mural", date:"Quinta, 08/10", days:["10-08"], types:["org"],
+  kicker:"Semana 1: lançamento", headline:"Operação mural: noite de montagem",
+  lede:"No fim do expediente, a equipe decora a entrada das sedes para que todo mundo chegue na sexta com a surpresa.",
+  actions:[
+    "Montar o mural \"Quem é esse bebê?\" com as fotos de infância dos colaboradores, com votação para adivinhar quem é quem.",
+    "Montar a galeria com os desenhos das crianças sobre o tema \"meu pai/mãe no trabalho\", com a foto do artista e uma plaquinha estilo museu."
+  ],
+  plaque:true
+},
+{
+  id:"0910", short:"É hoje!", date:"Sexta, 09/10", days:["10-09"], types:["slack","acao"],
+  kicker:"Semana 1: lançamento", headline:"A IPM acordou diferente",
+  lede:"O mural \"Quem é esse bebê?\" e a galeria de arte das crianças são revelados na entrada das sedes, e as fotos de perfil do Slack viram fotos de infância. Na segunda é feriado.",
+  actions:[
+    "Revelação do mural \"Quem é esse bebê?\" e da galeria de arte das crianças na entrada das sedes.",
+    "Colaboradores trocam a foto de perfil do Slack por uma foto de quando eram crianças."
+  ],
+  comms:[
+    {type:"slack", n:3, text:`É hoje! A IPM acordou diferente.
+
+Quem passar pela entrada das sedes vai encontrar o mural "Quem é esse bebê?", com fotos de infância dos colaboradores. Será que você consegue descobrir quem é quem?
+
+Ao lado, preparamos uma pequena galeria de arte 🎨 com desenhos feitos pelas crianças especiais da vida de alguns colegas, que retrataram como imaginam o trabalho deles por aqui. 
+Olha o exemplo da Nina, filha do @Hiury, por exemplo: 
+
+[Foto do desenho]
+
+Ótimo feriado a todos! Não se esqueçam que a campanha solidária segue até 21/10.`}
+  ]
+},
+{
+  id:"1310", short:"Duas opções de dinâmica", date:"Terça, 13/10", days:["10-13"], types:["slack","acao"],
+  kicker:"Semana 2: interações", headline:"Que criança você foi? Ou um quiz nostálgico?",
+  lede:"Depois do feriado, uma dinâmica para os colaboradores, com duas opções em aberto: a frase \"Hoje sou a criança que...\" ou um quiz nostálgico dos anos 90 e 2000. Escolha uma para publicar.",
+  commsTitle:"Duas opções de comunicado",
+  comms:[
+    {type:"slack", n:4, label:"Slack #4 · Opção 1", who:"Que criança você foi?", text:`🧒 Que criança você foi?
+
+Dizem que a criança que fomos continua com a gente, e às vezes até escolhe a nossa profissão. Vamos descobrir?
+
+Criamos uma brincadeira rápida: você conta que tipo de criança era e qual é o seu trabalho hoje, e a página gera a sua frase "Hoje sou a criança que...".
+👉 [link]
+
+Depois, compartilhe o resultado aqui na thread. ✏️
+
+Para inspirar: "Era a criança que vendia desenhos para a família, já era do marketing!”`},
+    {type:"slack", n:4, label:"Slack #4 · Opção 2", who:"Quiz nostálgico: anos 90 e 2000", text:`📼 Você sobreviveria aos anos 90 e 2000?
+
+Tamagotchi, Pokémon, Chiquititas, É o Tchan, álbum de figurinhas... Quem viveu essa época tem muita coisa guardada na memória. Será que você ainda lembra?
+
+Preparamos um quiz nostálgico com brinquedos, desenhos e músicas dos anos 90 e 2000. São só alguns minutinhos.
+👉 [link]
+
+Depois, conte aqui na thread quantas você acertou. 🕹️
+
+Para aquecer: qual era o nome do bichinho virtual que precisava ser alimentado o dia inteiro, senão... morria?`}
+  ]
+},
+{
+  id:"1510", short:"Termômetro", date:"Quinta, 15/10", days:["10-15"], types:["slack","email"],
+  kicker:"Semana 2: interações", headline:"O termômetro de doações subiu",
+  lede:"Atualização da meta e reforço dos itens que as instituições mais precisam, no Slack e por e-mail.",
+  comms:[
+    {type:"slack", n:5, text:`🌡️ O termômetro de doações subiu!
+
+Até agora, arrecadamos [X] itens para o Lar da Menina e a Fundação Vidal Ramos, e já estamos em [X]% da nossa meta.
+
+Para chegarmos lá, os itens que as instituições mais precisam neste momento são [item 1], [item 2] e [item 3].
+
+A arrecadação vai até 21/10. Você pode deixar sua doação nas caixas da Fábrica, em Rio do Sul, e da sede de Floripa, ou, se trabalha remoto, fazer um Pix diretamente para as instituições. Ainda dá tempo de batermos a meta juntos! 🙌`},
+    {type:"email", n:2, subject:"Campanha solidária: ainda dá tempo de doar", text:`Olá, pessoal!
+
+Nossa campanha solidária de Dia das Crianças está avançando, e o termômetro de doações já mostra o resultado do engajamento de vocês.
+
+Até agora, arrecadamos [X] itens para o Lar da Menina e a Fundação Vidal Ramos, o que representa [X]% da nossa meta.
+
+Para chegarmos lá, os itens que as instituições mais precisam neste momento são [item 1], [item 2] e [item 3].
+
+Também seguem sendo muito bem-vindos os demais itens da lista, como fraldas infantis, produtos de higiene infantil e para adolescentes, leite integral e achocolatado, material escolar, livros de literatura, roupas, calçados, roupas de cama e toalhas.
+
+Os produtos de higiene, cuidados e alimentação devem ser novos, lacrados e dentro do prazo de validade. Roupas, calçados, roupas de cama, toalhas e livros podem ser usados, desde que estejam em bom estado.
+
+A arrecadação vai até 21/10. Ainda dá tempo de batermos a meta juntos!
+
+Obrigado por fazer parte!
+[Time IPM]`}
+  ]
+},
+{
+  id:"2010", short:"Uma criança explica", date:"Terça, 20/10", days:["10-20"], types:["slack"],
+  kicker:"Semana 3: encerramento", headline:"O filho do Yuri explica o que a gente faz",
+  lede:"O áudio do filho do Yuri respondendo o que o pai faz no trabalho. E o lembrete de que amanhã é o último dia de doações.",
+  guide:[
+    {title:"Perguntas para os menores (2 a 3 anos)", intro:"São perguntas de resposta curta, que funcionam até com uma palavra ou um gesto:", items:[
+      "Onde o papai vai quando sai de casa?",
+      "O que o papai faz lá?",
+      "Tem computador no trabalho do papai?",
+      "O papai é forte? O que ele consegue fazer?",
+      "Do que o papai mais gosta?"
+    ]},
+    {title:"Perguntas para os maiores (4 a 5 anos)", intro:"Aqui entra a imaginação, que é onde costumam aparecer as respostas mais engraçadas:", items:[
+      "O que o papai faz o dia inteiro no computador?",
+      "Com quem o papai conversa no trabalho?",
+      "O papai tem amigos no trabalho? Como eles se chamam?",
+      "Qual é o superpoder do papai?",
+      "Se você fosse trabalhar no lugar do papai, o que ia fazer?",
+      "O que você quer ser quando crescer?"
+    ]},
+    {title:"Dicas para gravar com essa idade", items:[
+      "Pergunte brincando, não como entrevista: no colo, desenhando ou no meio de uma brincadeira, a criança responde com mais naturalidade.",
+      "Puxe com \"e aí?\" ou \"e depois?\": muitas vezes a primeira resposta é curta, e a graça aparece na segunda.",
+      "Não corrija e não sugira a resposta: se ela disser que o papai \"conserta foguete\", é exatamente isso que vai render no áudio.",
+      "Grave várias vezes e em dias diferentes: nessa idade, a criança responde muito conforme o humor do momento.",
+      "Escute antes de publicar: mesmo com perguntas leves, ela pode citar algo da rotina da família que prefira não compartilhar."
+    ]}
+  ],
+  comms:[
+    {type:"slack", n:6, text:`🎧 Afinal, o que a gente faz na IPM? Uma criança explica.
+
+Pedimos ao Yuri que fizesse algumas perguntas ao filho. As respostas foram sinceras, e vocês precisam ouvir. 😄
+
+[áudio – filho do Yuri]
+
+E você? Já perguntou para a criança especial da sua vida o que ela acha que você faz? Conta aqui na thread!
+
+⏳ Lembrete: amanhã (21/10) é o último dia da campanha solidária. Quem ainda não doou tem até lá para deixar sua contribuição nas caixas das sedes ou fazer um Pix direto para as instituições.`}
+  ]
+},
+{
+  id:"2110", short:"Último dia", date:"Quarta, 21/10", days:["10-21"], types:["org"],
+  kicker:"Semana 3: encerramento", headline:"Último dia de doações",
+  lede:"A arrecadação fecha hoje. É o dia de contar os itens, fechar o termômetro e preparar a entrega.",
+  actions:[
+    "Encerrar a arrecadação nas caixas da Fábrica, em Rio do Sul, e da sede de Floripa.",
+    "Contar os itens e as doações via Pix informadas, para fechar o total do termômetro.",
+    "Organizar a entrega ao Lar da Menina e à Fundação Vidal Ramos, marcada para a manhã de 22/10."
+  ]
+},
+{
+  id:"2210", short:"Entrega e agradecimento", date:"Quinta, 22/10", days:["10-22"], types:["org","slack"],
+  kicker:"Semana 3: encerramento", headline:"Conseguimos!",
+  lede:"De manhã, as doações chegam às instituições. À tarde, o post de agradecimento conta o resultado e mostra os melhores momentos do mês.",
+  actions:[
+    "Manhã: entrega das doações ao Lar da Menina e à Fundação Vidal Ramos, com registro em fotos.",
+    "Tarde: publicação do comunicado de agradecimento no Slack, com o total arrecadado e as fotos da entrega e das ações."
+  ],
+  comms:[
+    {type:"slack", n:7, text:`🎉 Conseguimos! Obrigado, IPM.
+
+A campanha solidária de Dia das Crianças chegou ao fim, e o resultado é de todos vocês: arrecadamos [total] itens para o Lar da Menina e a Fundação Vidal Ramos, [X]% da nossa meta. [Se bateu a meta: "Passamos da meta!"]
+
+As doações já foram entregues às instituições e vão fazer diferença no dia a dia de muitas crianças e adolescentes.
+
+E, ao longo do mês, a criança que existe em cada um também apareceu por aqui: nos murais "Quem é esse bebê?", na galeria de arte das crianças, no dress code temático, nas frases "Hoje sou a criança que..." e no áudio que fez todo mundo rir.
+
+Confiram alguns dos melhores momentos:
+[fotos das doações]
+[fotos do mural e da galeria]
+
+Obrigado a cada um que doou, compartilhou suas lembranças e entrou na brincadeira. 🙏`}
+  ]
+}
+];
+
+/* ---------- helpers ---------- */
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = id => document.getElementById(id);
+const dayMap = {};
+pages.forEach((p,i) => (p.days||[]).forEach(d => dayMap[d] = i));
+const rangeOf = key => pages.findIndex(p => p.range && key >= p.range[0] && key <= p.range[1]);
+
+/* ---------- calendar ---------- */
+function buildCalendar(){
+  const wrap = $("calendar");
+  const wds = ["D","S","T","Q","Q","S","S"];
+  let html = `<div class="cal">` + wds.map(w => `<div class="wd" aria-hidden="true">${w}</div>`).join("");
+  const start = new Date(2026, 8, 27);
+  for(let n=0; n<35; n++){
+    const dt = new Date(2026, 8, 27 + n);
+    const m = dt.getMonth(), d = dt.getDate();
+    const mName = m===8 ? "setembro" : "outubro";
+    const key = String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+    const rIdx = rangeOf(key);
+    const rp = rIdx >= 0 ? pages[rIdx] : null;
+    const own = dayMap[key] === undefined && rp;
+    const idx = dayMap[key] !== undefined ? dayMap[key] : (rp ? rIdx : undefined);
+    const p = idx !== undefined ? pages[idx] : null;
+    const cls = ["day"];
+    if(m===8) cls.push("sep");
+    if(p && !own) cls.push("has");
+    if(p && !own){
+      if(p.types.includes("acao")) cls.push("t-acao");
+      else if(p.types.every(t => t === "org")) cls.push("t-org");
+    }
+    if(m===9 && d>=5 && d<=21) cls.push("drive");
+    if(m===9 && d===12) cls.push("holiday");
+    if(rp){
+      cls.push("range");
+      if(own) cls.push("r-own");
+      if(key === rp.range[0]) cls.push("r-start");
+      if(dt.getDay() === 0) cls.push("r-row-start");
+      if(dt.getDay() === 6) cls.push("r-row-end");
+      if(key === rp.range[1]) cls.push("r-end");
+    }
+    const isRange = own;
+    const dots = p && !isRange ? `<span class="dots">${ORDER.filter(t => (p.types||[]).includes(t)).map(t=>`<i class="mk ${t}"></i>`).join("")}</span>` : `<span class="dots"></span>`;
+    const num = `<span>${d}</span>`;
+    const label = `${d} de ${mName}` + (m===9&&d===12 ? ", feriado" : "") + (p ? `: ${p.short}` : "") + (rp && !own ? `, durante a ${rp.short.toLowerCase()}` : "");
+    html += p
+      ? `<button class="${cls.join(" ")}" data-idx="${idx}" aria-label="${esc(label)}">${num}${dots}</button>`
+      : `<span class="${cls.join(" ")}" aria-label="${esc(label)}">${num}${dots}</span>`;
+  }
+  wrap.innerHTML = html + `</div>`;
+  wrap.querySelectorAll("button.day").forEach(b => b.addEventListener("click", () => go(+b.dataset.idx)));
+}
+
+/* ---------- index ---------- */
+function buildIndex(){
+  $("index").innerHTML = pages.map((p,i) => {
+    const d = (p.days && p.days.length) || p.range ? p.date.replace(/^[^,]+, /,"").replace(" a ","–") : (i===0 ? "Capa" : "Notas");
+    const mks = ORDER.filter(t => (p.types||[]).includes(t)).map(t => `<i class="mk ${t}" title="${TYPE_NAMES[t]}"></i>`).join("");
+    return `<li><button data-idx="${i}"><span class="d">${esc(d)}</span><span>${esc(p.short)}</span><span class="dots" aria-hidden="true">${mks}</span></button></li>`;
+  }).join("");
+  $("index").querySelectorAll("button").forEach(b => b.addEventListener("click", () => go(+b.dataset.idx)));
+}
+
+/* ---------- renderers ---------- */
+const TYPE_NAMES = {slack:"Slack", email:"E-mail", acao:"Ação com os times", org:"Organização"};
+const ORDER = ["acao","slack","email","org"];
+const chips = types => `<span class="chips">${ORDER.filter(t => (types||[]).includes(t)).map(t => `<span class="chip ${t}"><i class="mk ${t}"></i>${TYPE_NAMES[t]}</span>`).join("")}</span>`;
+function msgCard(c){
+  const isSlack = c.type === "slack";
+  const head = `<div class="msg-head"><span class="avatar" aria-hidden="true">IPM</span>
+    <span class="msg-who"><b>Time IPM</b><small>${c.who || (isSlack ? "Comunicado no Slack" : "E-mail para todos os colaboradores")}</small></span>
+    <span class="tag">${c.label || ((isSlack ? "Slack" : "E-mail") + " #" + c.n)}</span></div>`;
+  const meta = isSlack ? "" : `<div class="email-meta"><div><b>De:</b> Time IPM</div><div><b>Assunto:</b> ${esc(c.subject)}</div></div>`;
+  return `<section class="msg ${c.type}" aria-label="${esc(c.label || ((isSlack?"Slack":"E-mail")+" "+c.n))}">${head}${meta}
+    <div class="msg-body">${esc(c.text)}</div>
+    <div class="copy"><button data-copy>Copiar texto</button></div></section>`;
+}
+
+function coverHTML(){
+  const primary = p => (p.types||[]).includes("acao") ? "acao" : (p.types||[])[0];
+  const firstSentence = t => { const m = t.match(/^.*?[.!?](\s|$)/); return m ? m[0].trim() : t; };
+  let items = "", lastGroup = "";
+  pages.slice(1).forEach((p,k) => {
+    const i = k + 1;
+    const group = p.kicker;
+    if(group !== lastGroup){ const gd = ["1310","2010"].includes(p.id) ? " drive" : ""; items += `<li class="tl-group${gd}" aria-hidden="true">${esc(group)}</li>`; lastGroup = group; }
+    if(p.id === "1310"){
+      items += `<li class="tl-item hol drive"><span class="tl-node" aria-hidden="true"></span>
+        <div class="tl-when">12/10<small>Segunda</small></div>
+        <div class="tl-body"><span class="tl-title">Feriado</span><p class="tl-sum">Nossa Senhora Aparecida e Dia das Crianças.</p></div></li>`;
+    }
+    const inDrive = ["0510","0710","0810","0910","1310","1510","2010","2110"].includes(p.id);
+    const flag = p.id === "0510" ? `<span class="tl-flag">abre a arrecadação</span>` : p.id === "2110" ? `<span class="tl-flag">fecha a arrecadação</span>` : "";
+    const cls = ["tl-item", "p-" + primary(p)];
+    if(inDrive) cls.push("drive");
+    if(p.id === "0510") cls.push("d-start");
+    if(p.id === "2110") cls.push("d-end");
+    const parts = p.date.split(", ");
+    const when = parts.length > 1 ? `${esc(parts[1])}<small>${esc(parts[0])}</small>` : `${esc(p.date.split(" a ")[0])}<small>até ${esc(p.date.split(" a ")[1] || "")}</small>`;
+    items += `<li class="${cls.join(" ")}"><span class="tl-node" aria-hidden="true"></span>
+      <div class="tl-when">${when}</div>
+      <div class="tl-body">${flag}<button class="tl-title" data-idx="${i}">${esc(p.headline)}</button>
+        <p class="tl-sum">${esc(firstSentence(p.lede))}</p>${chips(p.types)}</div></li>`;
+  });
+  return `
+    <div class="fronts">
+      <div class="front"><h4>Para os colaboradores</h4><p>Mural "Quem é esse bebê?", galeria de arte das crianças, fotos de infância no perfil do Slack, a dinâmica de 13/10 (\"Hoje sou a criança que...\" ou quiz nostálgico) e o áudio das crianças explicando o que os pais fazem.</p></div>
+      <div class="front"><h4>Campanha solidária</h4><p>Arrecadação de 05/10 a 21/10 para o Lar da Menina e a Fundação Vidal Ramos, com caixas nas sedes, Pix para quem é remoto e um termômetro de doações acompanhando a meta.</p></div>
+    </div>
+    <h3>Linha do tempo</h3>
+    <p class="tl-sum" style="margin:-4px 0 6px">A linha lilás ao lado dos marcadores acompanha o período de arrecadação, de 05/10 a 21/10.</p>
+    <ol class="timeline">${items}</ol>`;
+}
+
+function plaqueHTML(){
+  return `<h3>Modelo da plaquinha da galeria</h3>
+  <div class="plaque">
+    <div class="title">"Mamãe salvando o computador"</div>
+    <div>Artista: Laura, 6 anos</div>
+    <div>Técnica: giz de cera e muito amor sobre papel sulfite</div>
+    <div>Inspiração: Ana Souza, Analista de Suporte</div>
+  </div>`;
+}
+
+function reviewHTML(p){
+  return `<ol class="review">${p.review.map(r => `<li><span class="where">${esc(r.where)}</span><b>${esc(r.title)}</b><br>${esc(r.text)}</li>`).join("")}</ol>`;
+}
+
+/* ---------- navigation ---------- */
+let current = 0;
+function render(i, animate){
+  const p = pages[i];
+  let h = `<div class="edition-line"><span>${esc(p.date)}</span><span>Edição ${i+1} de ${pages.length}</span></div>
+    ${(p.types||[]).length ? `<div style="margin:-4px 0 12px">${chips(p.types)}</div>` : ""}
+    <p class="kicker">${esc(p.kicker)}</p>
+    <h2 class="headline" tabindex="-1">${esc(p.headline)}</h2>
+    <p class="lede">${esc(p.lede)}</p>`;
+  if(p.cover) h += coverHTML();
+  if(p.actionGroups){ h += p.actionGroups.map(g => `<h3>${esc(g.title)}</h3><ul class="actions">${g.items.map(a=>`<li>${esc(a)}</li>`).join("")}</ul>`).join(""); }
+  if(p.actions){ h += `<h3>${(p.types||[]).includes("acao") ? "O que acontece" : "Bastidores"}</h3><ul class="actions">${p.actions.map(a=>`<li>${esc(a)}</li>`).join("")}</ul>`; }
+  if(p.guide){ h += `<p class="kicker" style="margin-top:26px">Roteiro do áudio</p>` + p.guide.map(g => `<h3 style="margin-top:10px">${esc(g.title)}</h3>${g.intro ? `<p style="margin:0 0 6px;max-width:62ch">${esc(g.intro)}</p>` : ""}<ul class="actions">${g.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`).join(""); }
+  if(p.notes) h += p.notes.map(n => `<p class="margin-note">${esc(n)}</p>`).join("");
+  if(p.comms){ h += `<h3>${p.commsTitle ? p.commsTitle : p.comms.length > 1 ? "Os comunicados do dia" : (p.comms[0].label ? "A mensagem do período" : "O comunicado do dia")}</h3>` + p.comms.map(msgCard).join(""); }
+  if(p.plaque) h += plaqueHTML();
+  if(p.review) h += reviewHTML(p);
+  $("content").innerHTML = h;
+
+  $("content").querySelectorAll(".timeline button.tl-title").forEach(b => b.addEventListener("click", () => go(+b.dataset.idx)));
+  $("content").querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", () => copyText(b)));
+
+  const prev = pages[i-1], next = pages[i+1];
+  $("prev").disabled = !prev; $("next").disabled = !next;
+  $("prev").innerHTML = prev ? `<small>Página anterior</small>${esc(prev.short)}` : "";
+  $("next").innerHTML = next ? `<small>Próxima página</small>${esc(next.short)}` : "";
+  $("pageno").textContent = `pág. ${i+1}`;
+
+  document.querySelectorAll(".index button").forEach(b => b.setAttribute("aria-current", +b.dataset.idx === i ? "true" : "false"));
+  document.querySelectorAll(".day").forEach(d => d.classList.toggle("current", d.dataset.idx !== undefined && +d.dataset.idx === i));
+  document.querySelectorAll(".day.range").forEach(d => d.classList.toggle("range-on", pages[i].range !== undefined));
+
+  const page = $("page");
+  if(animate){ page.classList.remove("turn"); void page.offsetWidth; page.classList.add("turn"); }
+}
+
+function go(i){
+  if(i < 0 || i >= pages.length) return;
+  current = i;
+  try{ history.replaceState(null, "", "#" + pages[i].id); }catch(e){}
+  try{ localStorage.setItem("recreio-page", pages[i].id); }catch(e){}
+  render(i, true);
+  const top = $("page").getBoundingClientRect().top;
+  if(top < 0) $("page").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+  const hl = document.querySelector(".headline"); if(hl) hl.focus({preventScroll:true});
+}
+
+function copyText(btn){
+  const card = btn.closest(".msg");
+  const body = card.querySelector(".msg-body").textContent;
+  const subj = card.querySelector(".email-meta div:nth-child(2)");
+  const text = subj ? subj.textContent + "\n\n" + body : body;
+  const done = () => { btn.textContent = "Texto copiado"; setTimeout(()=>btn.textContent="Copiar texto", 1800); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done){
+  const ta = document.createElement("textarea"); ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); done(); }catch(e){ }
+  ta.remove();
+}
+
+$("prev").addEventListener("click", () => go(current-1));
+$("next").addEventListener("click", () => go(current+1));
+document.addEventListener("keydown", e => {
+  if(e.target.closest && e.target.closest("input,textarea")) return;
+  if(e.key === "ArrowRight") go(current+1);
+  if(e.key === "ArrowLeft") go(current-1);
+});
+
+buildCalendar();
+buildIndex();
+(function start(){
+  let id = location.hash.replace("#","");
+  if(!id){ try{ id = localStorage.getItem("recreio-page") || ""; }catch(e){ id = ""; } }
+  const i = Math.max(0, pages.findIndex(p => p.id === id));
+  current = i;
+  render(i, false);
+})();
+</script>
+</body>
+</html>
